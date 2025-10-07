@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const{addToCart} = useContext(AppContext)
+  const{addToCart , url} = useContext(AppContext)
   const navigate = useNavigate()
-  const url = "http://localhost:3000/api";
+  // const url = "http://localhost:3000/api";
   const [product, setProduct] = useState([]);
   useEffect(() => {
     const fetchProduct = async () => {

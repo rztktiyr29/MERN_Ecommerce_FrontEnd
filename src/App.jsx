@@ -1,6 +1,6 @@
 import React, { Profiler, useContext } from 'react'
 import AppContext from "./context/AppContext"
-import ShowProduct from './components/product/showProduct'
+import ShowProduct from './components/product/ShowProduct'
 import {BrowserRouter as Router , Routes , Route} from 'react-router-dom'
 import ProductDetails from './components/product/ProductDetails'
 import Navbar from './components/Navbar'

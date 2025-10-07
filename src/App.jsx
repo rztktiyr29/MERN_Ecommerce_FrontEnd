@@ -9,7 +9,7 @@ import Login from './components/user/Login'
 import Register from './components/user/Register'
 import Address from './components/Address'
 import { ToastContainer, toast } from "react-toastify";
-import Profile from './components/user/profile'
+import Profile from './components/user/Profile'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
 import Success from './components/Success'

@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const{addToCart , url} = useContext(AppContext)
+  const{addToCart} = useContext(AppContext)
   const navigate = useNavigate()
-  // const url = "http://localhost:3000/api";
+  const url = "https://mern-ecommerce-api-9e9r.onrender.com/api";
   const [product, setProduct] = useState([]);
   useEffect(() => {
     const fetchProduct = async () => {

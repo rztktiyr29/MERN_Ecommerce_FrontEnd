@@ -1,0 +1,53 @@
+import React, { useContext } from "react";
+import AppContext from "../../context/AppContext";
+import { Link } from "react-router-dom";
+
+const ShowProduct = () => {
+  const { products, filterData, addToCart } = useContext(AppContext);
+
+  return (
+    <div className="min-h-screen bg-gray-900 flex justify-center px-4 sm:px-6 lg:px-8 mt-24 py-12">
+      <div className="w-full max-w-7xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filterData?.map((product) => (
+            <div
+              key={product._id}
+              className="bg-gray-800 shadow-md rounded-lg p-4 flex flex-col h-full text-white "
+            >
+              <Link
+                to={`/product/${product._id}`}
+                className="flex-grow flex flex-col items-center"
+              >
+                <img
+                  src={product.imgSrc}
+                  alt={product.title}
+                  className="w-48 h-48 object-contain my-4"
+                />
+                <h2 className="text-lg font-semibold text-center">
+                  {product.title}
+                </h2>
+                <p className="text-gray-400">${product.price}</p>
+              </Link>
+              <button
+                onClick={() => {
+                  addToCart(
+                    product._id,
+                    product.title,
+                    product.price,
+                    1,
+                    product.imgSrc
+                  );
+                }}
+                className="mt-3 px-2 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 hover:cursor-pointer"
+              >
+                Add to Cart
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ShowProduct;

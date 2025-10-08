@@ -7,6 +7,7 @@ import AppContext from "../context/AppContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isToggle, setIsToggel] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const { setFilterData, products, logout, isAuthenticated, cart, isAdmin } =
@@ -36,30 +37,32 @@ const Navbar = () => {
         {/* Logo */}
         <Link
           to={"/"}
-          className="text-2xl md:text-3xl font-bold overflow-y-hidden "
+          className="text-xl shrink-0 sm:2xl md:text-3xl font-bold sm:font-bold overflow-y-hidden"
         >
           Ecommerce
         </Link>
 
         {/* Search Bar */}
-
-        <div className="flex-grow max-w-md px-2">
-          <form className="relative w-full" onSubmit={submitHandler}>
-            <input
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              type="text"
-              placeholder="Search Products..."
-              className="w-full border text-white bg-gray-800 border-gray-600 rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button
-              type="submit"
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
-            >
-              <FaSearch />
-            </button>
-          </form>
-        </div>
+        {location.pathname !== "/login" &&
+          location.pathname !== "/register" && (
+            <div className="flex-grow max-w-md px-2">
+              <form className="relative w-full" onSubmit={submitHandler}>
+                <input
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  type="text"
+                  placeholder="Search Products..."
+                  className="w-full border text-white bg-gray-800 border-gray-600 rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button
+                  type="submit"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                >
+                  <FaSearch />
+                </button>
+              </form>
+            </div>
+          )}
 
         {/* Desktop menu */}
 
@@ -257,7 +260,8 @@ const Navbar = () => {
 
       {location.pathname == "/" && (
         <nav className="flex justify-between items-center px-4 py-4">
-          <ul className="w-screen flex justify-around items-center">
+          {/* Desktop menu */}
+          <ul className="w-screen justify-around items-center hidden md:flex">
             <li
               onClick={() => setFilterData(products)}
               className="text-xl font-bold hover:cursor-pointer hover:text-gray-400"
@@ -319,6 +323,99 @@ const Navbar = () => {
               1099
             </li>
           </ul>
+          {/* Filter button */}
+          <button
+            onClick={() => setIsToggel((prev) => !prev)}
+            className="mt-3 px-2 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 hover:cursor-pointer md:hidden"
+          >
+            Filters
+          </button>
+          {/* Mobile menu */}
+          {isToggle && (
+            <ul className="fixed top-24 h-screen w-screen left-0 right-0 px-6 flex flex-col gap-2 bg-gray-900 p-4 rounded-md shadow-lg md:hidden ">
+              <li
+                onClick={() => {
+                  setIsToggel(false);
+                  setFilterData(products);
+                }}
+                className="text-xl font-bold hover:cursor-pointer hover:text-gray-400"
+              >
+                No Filter
+              </li>
+              <li
+                onClick={() => {
+                  setIsToggel(false);
+                  filterByCategory("phone")}}
+                className="text-xl font-bold hover:cursor-pointer hover:text-gray-400"
+              >
+                Mobiles
+              </li>
+              <li
+                onClick={() => {
+                  setIsToggel(false);
+                  filterByCategory("laptop")}}
+                className="text-xl font-bold hover:cursor-pointer hover:text-gray-400"
+              >
+                Laptops
+              </li>
+              <li
+                onClick={() => {
+                  setIsToggel(false);
+                  filterByCategory("camera")}}
+                className="text-xl font-bold hover:cursor-pointer hover:text-gray-400"
+              >
+                Cameras
+              </li>
+              <li
+                onClick={() => {
+                  setIsToggel(false);
+                  filterByCategory("headphone")}}
+                className="text-xl font-bold hover:cursor-pointer hover:text-gray-400"
+              >
+                Headphones
+              </li>
+              <li
+                onClick={() => {
+                  setIsToggel(false);
+                  filterByPrice(99)}}
+                className="text-xl font-bold hover:cursor-pointer hover:text-gray-400"
+              >
+                99
+              </li>
+              <li
+                onClick={() => {
+                  setIsToggel(false);
+                  filterByPrice(299)}}
+                className="text-xl font-bold hover:cursor-pointer hover:text-gray-400"
+              >
+                299
+              </li>
+              <li
+                onClick={() => {
+                  setIsToggel(false);
+                  filterByPrice(699)}}
+                className="text-xl font-bold hover:cursor-pointer hover:text-gray-400"
+              >
+                699
+              </li>
+              <li
+                onClick={() => {
+                  setIsToggel(false);
+                  filterByPrice(799)}}
+                className="text-xl font-bold hover:cursor-pointer hover:text-gray-400"
+              >
+                999
+              </li>
+              <li
+                onClick={() => {
+                  setIsToggel(false);
+                  filterByPrice(1099)}}
+                className="text-xl font-bold hover:cursor-pointer hover:text-gray-400"
+              >
+                1099
+              </li>
+            </ul>
+          )}
         </nav>
       )}
     </div>

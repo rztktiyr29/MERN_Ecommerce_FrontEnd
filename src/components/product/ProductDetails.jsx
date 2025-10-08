@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const{addToCart} = useContext(AppContext)
+  const{addToCart , isAdmin , isAuthenticated} = useContext(AppContext)
   const navigate = useNavigate()
   const url = "https://mern-ecommerce-api-9e9r.onrender.com/api";
   const [product, setProduct] = useState([]);
@@ -42,7 +42,8 @@ const ProductDetails = () => {
             {product?.description}
           </p>
           <h2 className="text-3xl font-bold sm:text-4xl ">${product?.price}</h2>
-          <div className="flex gap-8 mt-8">
+         {isAuthenticated && !isAdmin && (
+           <div className="flex gap-8 mt-8">
             <button 
             onClick={()=> navigate('/shipping')}
             className="bg-red-400 font-bold px-3 py-2 rounded-md hover:bg-red-500 hover: cursor-pointer">
@@ -63,6 +64,7 @@ const ProductDetails = () => {
               Add to Cart
             </button>
           </div>
+         )}
         </div>
       </div>
       <div className="mt-20 w-screen max-w-7xl px-8">

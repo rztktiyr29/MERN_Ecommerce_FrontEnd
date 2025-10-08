@@ -3,7 +3,7 @@ import AppContext from "../../context/AppContext";
 import { Link } from "react-router-dom";
 
 const ShowProduct = () => {
-  const { products, filterData, addToCart } = useContext(AppContext);
+  const { products, filterData, addToCart , isAdmin , isAuthenticated } = useContext(AppContext);
 
   return (
     <div className="min-h-screen bg-gray-900 flex justify-center px-4 sm:px-6 lg:px-8 mt-24 py-12">
@@ -28,7 +28,9 @@ const ShowProduct = () => {
                 </h2>
                 <p className="text-gray-400">${product.price}</p>
               </Link>
-              <button
+
+              {isAuthenticated && !isAdmin && (
+                <button
                 onClick={() => {
                   addToCart(
                     product._id,
@@ -42,6 +44,7 @@ const ShowProduct = () => {
               >
                 Add to Cart
               </button>
+              )}
             </div>
           ))}
         </div>
